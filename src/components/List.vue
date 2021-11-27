@@ -1,14 +1,14 @@
 <script setup>
-import useTodos from "../composables/useTodos";
+  import useTodos from '../composables/useTodos'
 
-const { pending, completed, changeStatus } = useTodos();
+  const { pending, completed, changeStatus } = useTodos()
 
-defineProps({
-  isCompleted: {
-    default: false,
-    type: Boolean,
-  },
-});
+  defineProps({
+    isCompleted: {
+      default: false,
+      type: Boolean,
+    },
+  })
 </script>
 
 <template>
@@ -17,7 +17,7 @@ defineProps({
       class="text-2xl text-center"
       :class="isCompleted ? 'text-green-400' : 'text-blue-400'"
     >
-      {{ isCompleted ? "Completed" : "Pending" }}
+      {{ isCompleted ? 'Completed' : 'Pending' }}
     </h3>
     <ul class="pt-8 space-y-4">
       <li
@@ -29,7 +29,18 @@ defineProps({
             ? 'text-green-600 hover:bg-green-400'
             : 'text-blue-600 hover:bg-blue-400'
         "
-        class="w-full px-4 py-2 font-bold text-center transition-colors duration-500 bg-gray-300 rounded-lg  hover:cursor-pointer hover:text-gray-200"
+        class="
+          w-full
+          px-4
+          py-2
+          font-bold
+          text-center
+          transition-colors
+          duration-500
+          bg-gray-300
+          rounded-lg
+          hover:cursor-pointer hover:text-gray-200
+        "
       >
         {{ todo.content }}
       </li>

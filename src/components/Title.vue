@@ -1,21 +1,21 @@
 <script setup>
-import { ref } from "vue";
-import useTodos from "../composables/useTodos";
+  import { ref } from 'vue'
+  import useTodos from '../composables/useTodos'
 
-const { addTodo } = useTodos();
+  const { addTodo } = useTodos()
 
-const newTodo = ref("");
-const add = () => {
-  if (newTodo.value) {
-    addTodo(newTodo.value);
-    newTodo.value = "";
+  const newTodo = ref('')
+  const add = () => {
+    if (newTodo.value) {
+      addTodo(newTodo.value)
+      newTodo.value = ''
+    }
   }
-};
 </script>
 
 <template>
   <h1 class="pb-4 text-6xl font-thin tracking-tight text-center text-gray-300">
-    🚀 My Todo App
+    🚀 My To do App
   </h1>
   <input
     @change="add"
