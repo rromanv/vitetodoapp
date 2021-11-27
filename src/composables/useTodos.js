@@ -1,30 +1,49 @@
 import { ref, computed } from 'vue'
+import axios from 'axios'
 
 const todos = ref([])
 
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  params: {
+    username: import.meta.env.VITE_API_USERNAME,
+    password: import.meta.env.VITE_API_PASSWORD,
+  },
+})
+
 const useTodos = () => {
+  const getAll = async () => {
+    const { data } = await api.get()
+    todos.value = data
+  }
+
   const pending = computed(() => {
-    return todos.value.filter(todo => !todo.done)
+    return todos.value.filter(todo => !todo.completed)
   })
 
   const completed = computed(() => {
-    return todos.value.filter(todo => todo.done)
+    return todos.value.filter(todo => todo.completed)
   })
 
-  const addTodo = newTodo => {
+  const addTodo = async newTodo => {
     if (newTodo.trim()) {
-      todos.value.push({
-        id: todos.value.length,
-        content: newTodo,
-        done: false,
+      await api.post('', {
+        text: newTodo,
+        completed: false,
       })
+      await getAll()
     }
   }
 
-  const changeStatus = id => {
+  const changeStatus = async id => {
     const todo = todos.value.find(todo => todo.id === id)
-    todo.done = !todo.done
+    todo.completed = !todo.completed
+    const { id: _id, ...todoToUpdate } = todo
+    await api.put(`/${id}`, todoToUpdate)
+    await getAll()
   }
+
+  getAll()
 
   return {
     todos,

@@ -42,7 +42,7 @@
           hover:cursor-pointer hover:text-gray-200
         "
       >
-        {{ todo.content }}
+        {{ todo.text }}
       </li>
     </ul>
   </div>
